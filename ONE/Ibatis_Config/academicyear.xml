@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="academicyear">
+	<typeAlias alias="acyearObj" type="com.java.plyd.spring.entity.academicyear" />
+	<resultMap id="acyearMap" class="acyearObj">
+		<result property="id" column="id" />
+		<result property="total" column="total" />
+		<result property="ofitem" column="ofitem" />
+		<result property="invoicename" column="invoicename" />
+		
+		
+	</resultMap>
+	
+	<insert id="insert" parameterClass="acyearObj">
+		INSERT INTO invoice (id,total,ofitem,invoicename)
+		 VALUES (#id#,#total#,#ofitem#,#invoicename#);
+	</insert>
+	
+	<update id="update" parameterClass="acyearObj">
+		UPDATE invoice SET
+		total=#total#,
+		ofitem=#ofitem#,
+		invoicename=#invoicename#
+		WHERE id=#id#;
+		
+	</update>
+	
+	<delete id="delete" parameterClass="java.lang.Integer">
+		DELETE FROM invoice 		
+		WHERE id=#id#;
+		
+	</delete>
+		
+	<select id="selectAll" resultMap="acyearMap">
+		SELECT *
+		FROM invoice;
+	</select>
+
+	<select id="selectByID" resultMap="acyearMap" parameterClass="java.lang.Integer">
+		SELECT *
+		FROM invoice
+		WHERE id=#value#;
+	</select>
+
+</sqlMap>
